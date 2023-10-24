@@ -7,7 +7,7 @@ import (
 // Events server可以注册的回调事件
 type Events struct {
 	// Serving server accept()链接时 触发;用于初始化
-	Serving func(server Server) (action Action)
+	Serving func(server *Server) (action Action)
 
 	//
 	Opened func(c Conn) (out []byte, action Action)

@@ -3,6 +3,8 @@ package mynet
 import (
 	"net"
 	"syscall"
+
+	"mynet/poll"
 )
 
 type Conn interface {
@@ -25,7 +27,7 @@ type tcpConn struct {
 	out    []byte // output buffer
 	action Action
 	ctx    any
-	poll   *poll.Poll
+	poll   poll.IPoll
 	raddr  net.Addr
 	laddr  net.Addr
 	sa     syscall.Sockaddr // fd's socket address
