@@ -15,11 +15,12 @@ import (
 参考evio lite代码：
 - 移除多地址 1
 - 增加udp，unixSocket的实现
-- 易用
-- demo
+- 易用。参考已有框架实现，看下api怎么设计比较好用。
+- server demo。client demo
+- 接入trpc-go transport
 - 单测 1
 - poll实现，增加接口来封装实现 1
-
+- epoll实现
 */
 
 type Server struct {
@@ -28,7 +29,7 @@ type Server struct {
 	p        poll.IPoll
 	events   Events
 
-	Addr net.Addr
+	Addr net.Addr // todo 是否需要公开？
 	Ln   net.Listener
 	Lf   *os.File // listener's file
 	Lfd  int      // listener's fd
@@ -99,7 +100,6 @@ func (s *Server) Serve() error {
 			if done {
 				return nil
 			}
-
 		}
 	}
 	return nil
